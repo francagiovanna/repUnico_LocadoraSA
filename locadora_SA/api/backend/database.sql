@@ -1,8 +1,5 @@
-CREATE DATABASE IF NOT EXISTS game_rental;
-USE game_rental;
-
 CREATE TABLE IF NOT EXISTS games (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     genre VARCHAR(100) NOT NULL,
     platform VARCHAR(100) NOT NULL,
@@ -11,17 +8,17 @@ CREATE TABLE IF NOT EXISTS games (
 );
 
 CREATE TABLE IF NOT EXISTS customers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS rentals (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     game_id INT NOT NULL,
     customer_id INT NOT NULL,
-    rented_at DATE NOT NULL DEFAULT (CURRENT_DATE),
+    rented_at DATE NOT NULL DEFAULT CURRENT_DATE,
     due_date DATE NOT NULL,
     returned_at DATE,
     total_price DECIMAL(10, 2),

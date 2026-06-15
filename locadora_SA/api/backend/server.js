@@ -1,35 +1,28 @@
 import express from 'express'
-import { pool } from './config/db.js'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import gamesRoutes from './routes/jogos.routes.js'
+import customersRoutes from './routes/usuarios.routes.js'
+import rentalsRoutes from './routes/alugueis.routes.js'
+
+dotenv.config()
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
+
+app.use(cors())
 app.use(express.json())
 
+app.use('/games', gamesRoutes)
+app.use('/customers', customersRoutes)
+app.use('/rentals', rentalsRoutes)
 
-pool.on('error', (err, client) => {
-    console.error('Unexpected error on idle client', err)
-    process.exit(-1)
+app.get('/', (req, res) => {
+  res.json({ mensagem: '🎮 API Locadora S/A rodando!' })
 })
-
-
-const client = await pool.connect() // utilizamos quando vamos fazer transactions 
-
-
-app.get("/", (req, res) => {
-    res.json("Hola Mundo!")
-})
-
-app.get("/alunos", async (req, res) => {
-    try {
-        const restorno = await client.query("SELECT * from alunos")
-        res.status(200).json(restorno.rows)
-    } catch (error) {
-        throw new Error(error);
-    }
-})
-
-app.use('/alunos')
 
 app.listen(PORT, () => {
-    console.log(`Aplicação rodando em: http://localhost:${PORT}`)
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`)
 })
+
+export default app
