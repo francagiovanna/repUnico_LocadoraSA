@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
-
-const initialUsuarios = [
-  {
-    id: 1,
-    nome: "João Silva",
-    email: "joao@email.com",
-    tipo: "cliente",
-    ativo: true,
-  },
-];
+import {
+  getUsuarios,
+  criarUsuario,
+  atualizarUsuario,
+  excluirUsuario,
+} from "../services/api";
 
 const emptyForm = {
   nome: "",
@@ -18,21 +14,46 @@ const emptyForm = {
 };
 
 export default function Usuarios() {
-  const [usuarios, setUsuarios] = useState(initialUsuarios);
+  const [usuarios, setUsuarios] = useState([]);
   const [modal, setModal] = useState(false);
+  const [editandoId, setEditandoId] = useState(null);
   const [form, setForm] = useState(emptyForm);
 
-  function salvar() {
-    setUsuarios((u) => [
-      ...u,
-      {
-        id: Date.now(),
-        ...form,
-        ativo: true,
-      },
-    ]);
+  async function carregar() {
+    const dados = await getUsuarios();
+    setUsuarios(dados);
+  }
 
+  useEffect(() => {
+    carregar();
+  }, []);
+
+  function abrirNovo() {
+    setEditandoId(null);
+    setForm(emptyForm);
+    setModal(true);
+  }
+
+  function abrirEdicao(usuario) {
+    setEditandoId(usuario.id);
+    setForm({ nome: usuario.nome, email: usuario.email, tipo: usuario.tipo });
+    setModal(true);
+  }
+
+  async function salvar() {
+    if (editandoId) {
+      await atualizarUsuario(editandoId, form);
+    } else {
+      await criarUsuario(form);
+    }
     setModal(false);
+    carregar();
+  }
+
+  async function excluir(id) {
+    if (!confirm("Excluir este usuário?")) return;
+    await excluirUsuario(id);
+    carregar();
   }
 
   return (
@@ -42,10 +63,7 @@ export default function Usuarios() {
           <div className="page-title">Usuários</div>
         </div>
 
-        <button
-          className="btn btn-primary"
-          onClick={() => setModal(true)}
-        >
+        <button className="btn btn-primary" onClick={abrirNovo}>
           + Novo usuário
         </button>
       </div>
@@ -57,6 +75,7 @@ export default function Usuarios() {
               <th>Nome</th>
               <th>E-mail</th>
               <th>Status</th>
+              <th>Ações</th>
             </tr>
           </thead>
 
@@ -65,17 +84,18 @@ export default function Usuarios() {
               <tr key={u.id}>
                 <td>{u.nome}</td>
                 <td>{u.email}</td>
-
                 <td>
-                  <span
-                    className={`badge ${
-                      u.ativo
-                        ? "badge-green"
-                        : "badge-red"
-                    }`}
-                  >
+                  <span className={`badge ${u.ativo ? "badge-green" : "badge-red"}`}>
                     {u.ativo ? "Ativo" : "Inativo"}
                   </span>
+                </td>
+                <td>
+                  <button className="btn btn-link" onClick={() => abrirEdicao(u)}>
+                    Editar
+                  </button>
+                  <button className="btn btn-link btn-danger" onClick={() => excluir(u.id)}>
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}
@@ -85,44 +105,29 @@ export default function Usuarios() {
 
       {modal && (
         <Modal
-          title="Novo usuário"
+          title={editandoId ? "Editar usuário" : "Novo usuário"}
           onClose={() => setModal(false)}
         >
           <div className="form-group">
             <label className="form-label">Nome</label>
-
             <input
               className="form-input"
               value={form.nome}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  nome: e.target.value,
-                })
-              }
+              onChange={(e) => setForm({ ...form, nome: e.target.value })}
             />
           </div>
 
           <div className="form-group">
             <label className="form-label">E-mail</label>
-
             <input
               className="form-input"
               value={form.email}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  email: e.target.value,
-                })
-              }
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
           </div>
 
           <div className="modal-actions">
-            <button
-              className="btn btn-primary"
-              onClick={salvar}
-            >
+            <button className="btn btn-primary" onClick={salvar}>
               Salvar
             </button>
           </div>
