@@ -13,6 +13,6 @@ export const pool = new Pool({
   database: process.env.DB_NAME || 'game_rental',
 })
 
-pool.connect()
+pool.query('SELECT 1')
   .then(() => console.log('✅ Banco de dados conectado'))
   .catch((err) => console.error('❌ Erro ao conectar ao banco:', err))
