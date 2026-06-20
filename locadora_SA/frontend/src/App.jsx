@@ -21,9 +21,9 @@ export default function App() {
   };
 
   return (
-    <div className="app-layout">
+    <div className="flex min-h-screen bg-surface">
       <Sidebar page={page} setPage={setPage} user={user} onLogout={() => setUser(null)} />
-      <main className="app-main">{pages[page]}</main>
+      <main className="flex-1 p-6 overflow-y-auto">{pages[page]}</main>
     </div>
   );
 }
