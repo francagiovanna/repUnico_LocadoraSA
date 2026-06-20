@@ -22,10 +22,15 @@
   --font-mono: 'Share Tech Mono', monospace;
   --font-display: 'Orbitron', sans-serif;
   --font-retro: 'VT323', monospace;
+
+  --animate-grid-scroll: gridScroll 20s linear infinite;
 }
 
-/* Estilos globais de <body> — não são "classes" consumidas via className,
-   são a base visual da página (analogo a um @layer base do Tailwind) */
+@keyframes gridScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
 body {
   background: var(--color-surface);
   color: var(--color-ink);
