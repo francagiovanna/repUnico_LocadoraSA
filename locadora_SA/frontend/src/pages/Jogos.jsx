@@ -4,6 +4,7 @@ import Modal from "../components/Modal";
 const GENEROS = [
   "Ação",
   "Aventura",
+  "Corrida",
   "Esporte",
   "Luta",
   "Plataforma",
@@ -119,67 +120,72 @@ export default function Jogos() {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="flex items-end justify-between mb-8 pb-4 border-b border-border">
         <div>
-          <div className="page-title">Jogos</div>
-          <div className="page-subtitle">
+          <div className="font-display text-2xl font-bold text-neon tracking-[0.1em] [text-shadow:0_0_15px_var(--color-neon)]">
+            Jogos
+          </div>
+          <div className="text-xs text-dim mt-1 tracking-[0.05em]">
             {jogos.length} títulos cadastrados
           </div>
         </div>
 
-        <button className="btn btn-primary" onClick={abrirCriar}>
+        <button
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+          onClick={abrirCriar}
+        >
           + Novo jogo
         </button>
       </div>
 
-      <div className="search-bar">
+      <div className="flex items-center gap-3 mb-4">
         <input
-          className="search-input"
+          className="flex-1 bg-panel border border-border text-ink font-mono text-sm px-3 py-2 outline-none focus:border-neon placeholder:text-dim"
           placeholder="Buscar jogo..."
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
       </div>
 
-      <div className="table-wrap">
-        <table>
+      <div className="bg-panel border border-border overflow-auto">
+        <table className="w-full border-collapse text-sm">
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Título</th>
-              <th>Gênero</th>
-              <th>Plataforma</th>
-              <th>Qtd</th>
-              <th>Disponível</th>
-              <th>Ações</th>
+            <tr className="bg-surface-3 border-b border-border">
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">#</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Título</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Gênero</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Plataforma</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Qtd</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Disponível</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Ações</th>
             </tr>
           </thead>
 
           <tbody>
             {filtered.map((jogo) => (
-              <tr key={jogo.id}>
-                <td>{jogo.id}</td>
+              <tr key={jogo.id} className="border-b border-border last:border-b-0 hover:bg-neon/[0.03] transition-colors">
+                <td className="px-4 py-3 text-ink">{jogo.id}</td>
 
-                <td>
+                <td className="px-4 py-3 text-ink">
                   <strong>{jogo.titulo}</strong>
                 </td>
 
-                <td>{jogo.genero}</td>
+                <td className="px-4 py-3 text-ink">{jogo.genero}</td>
 
-                <td>
-                  <span className="badge badge-yellow">
+                <td className="px-4 py-3">
+                  <span className="inline-block px-2 py-0.5 text-[0.6rem] tracking-[0.1em] uppercase border border-neon-3 text-neon-3">
                     {jogo.plataforma}
                   </span>
                 </td>
 
-                <td>{jogo.quantidade}</td>
+                <td className="px-4 py-3 text-ink">{jogo.quantidade}</td>
 
-                <td>
+                <td className="px-4 py-3">
                   <span
-                    className={`badge ${
+                    className={`inline-block px-2 py-0.5 text-[0.6rem] tracking-[0.1em] uppercase border ${
                       jogo.disponivel > 0
-                        ? "badge-green"
-                        : "badge-red"
+                        ? "border-success text-success"
+                        : "border-danger text-danger"
                     }`}
                   >
                     {jogo.disponivel > 0
@@ -188,17 +194,17 @@ export default function Jogos() {
                   </span>
                 </td>
 
-                <td>
-                  <div style={{ display: "flex", gap: "0.4rem" }}>
+                <td className="px-4 py-3">
+                  <div className="flex gap-2">
                     <button
-                      className="btn btn-primary btn-sm"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
                       onClick={() => abrirEditar(jogo)}
                     >
                       Editar
                     </button>
 
                     <button
-                      className="btn btn-danger btn-sm"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
                       onClick={() => excluir(jogo.id)}
                     >
                       Excluir
@@ -216,11 +222,13 @@ export default function Jogos() {
           title={editando ? "Editar jogo" : "Novo jogo"}
           onClose={() => setModal(false)}
         >
-          <div className="form-group">
-            <label className="form-label">Título</label>
+          <div className="mb-4">
+            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+              Título
+            </label>
 
             <input
-              className="form-input"
+              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
               value={form.titulo}
               onChange={(e) =>
                 setForm({
@@ -231,15 +239,74 @@ export default function Jogos() {
             />
           </div>
 
-          <div className="modal-actions">
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+                Gênero
+              </label>
+
+              <select
+                className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none appearance-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+                value={form.genero}
+                onChange={(e) =>
+                  setForm({ ...form, genero: e.target.value })
+                }
+              >
+                <option value="">Selecione</option>
+                {GENEROS.map((g) => (
+                  <option key={g} value={g}>{g}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+                Plataforma
+              </label>
+
+              <select
+                className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none appearance-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+                value={form.plataforma}
+                onChange={(e) =>
+                  setForm({ ...form, plataforma: e.target.value })
+                }
+              >
+                <option value="">Selecione</option>
+                {PLATAFORMAS.map((p) => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+              Quantidade
+            </label>
+
+            <input
+              type="number"
+              min="1"
+              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+              value={form.quantidade}
+              onChange={(e) =>
+                setForm({ ...form, quantidade: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="flex gap-3 justify-end mt-6 pt-4 border-t border-border">
             <button
-              className="btn btn-danger"
+              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
               onClick={() => setModal(false)}
             >
               Cancelar
             </button>
 
-            <button className="btn btn-primary" onClick={salvar}>
+            <button
+              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+              onClick={salvar}
+            >
               Salvar
             </button>
           </div>
