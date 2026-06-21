@@ -37,10 +37,10 @@ export default function Dashboard() {
     <div>
       <div className="flex items-end justify-between mb-8 pb-4 border-b border-border">
         <div>
-          <div className="font-display text-2xl font-bold text-neon tracking-[0.1em] [text-shadow:0_0_15px_var(--color-neon)]">
+          <div className="font-display text-2xl font-bold text-neon tracking-widest [text-shadow:0_0_15px_var(--color-neon)]">
             Dashboard
           </div>
-          <div className="text-xs text-dim mt-1 tracking-[0.05em]">
+          <div className="text-xs text-dim mt-1 tracking-wider">
             Visão geral do sistema
           </div>
         </div>
@@ -86,7 +86,7 @@ export default function Dashboard() {
             key={i}
             className="flex items-center gap-4 px-5 py-3.5 text-[0.78rem] border-b border-border last:border-b-0"
           >
-            <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${dotColors[a.dot]}`} />
+            <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColors[a.dot]}`} />
             <span>{a.msg}</span>
             <span className="ml-auto text-dim text-xs">{a.hora}</span>
           </div>

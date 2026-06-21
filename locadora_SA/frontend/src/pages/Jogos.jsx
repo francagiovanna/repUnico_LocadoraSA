@@ -122,16 +122,16 @@ export default function Jogos() {
     <div>
       <div className="flex items-end justify-between mb-8 pb-4 border-b border-border">
         <div>
-          <div className="font-display text-2xl font-bold text-neon tracking-[0.1em] [text-shadow:0_0_15px_var(--color-neon)]">
+          <div className="font-display text-2xl font-bold text-neon tracking-widest [text-shadow:0_0_15px_var(--color-neon)]">
             Jogos
           </div>
-          <div className="text-xs text-dim mt-1 tracking-[0.05em]">
+          <div className="text-xs text-dim mt-1 tracking-wider">
             {jogos.length} títulos cadastrados
           </div>
         </div>
 
         <button
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
           onClick={abrirCriar}
         >
           + Novo jogo
@@ -163,7 +163,7 @@ export default function Jogos() {
 
           <tbody>
             {filtered.map((jogo) => (
-              <tr key={jogo.id} className="border-b border-border last:border-b-0 hover:bg-neon/[0.03] transition-colors">
+              <tr key={jogo.id} className="border-b border-border last:border-b-0 hover:bg-neon/3 transition-colors">
                 <td className="px-4 py-3 text-ink">{jogo.id}</td>
 
                 <td className="px-4 py-3 text-ink">
@@ -173,7 +173,7 @@ export default function Jogos() {
                 <td className="px-4 py-3 text-ink">{jogo.genero}</td>
 
                 <td className="px-4 py-3">
-                  <span className="inline-block px-2 py-0.5 text-[0.6rem] tracking-[0.1em] uppercase border border-neon-3 text-neon-3">
+                  <span className="inline-block px-2 py-0.5 text-[0.6rem] tracking-widest uppercase border border-neon-3 text-neon-3">
                     {jogo.plataforma}
                   </span>
                 </td>
@@ -182,7 +182,7 @@ export default function Jogos() {
 
                 <td className="px-4 py-3">
                   <span
-                    className={`inline-block px-2 py-0.5 text-[0.6rem] tracking-[0.1em] uppercase border ${
+                    className={`inline-block px-2 py-0.5 text-[0.6rem] tracking-widest uppercase border ${
                       jogo.disponivel > 0
                         ? "border-success text-success"
                         : "border-danger text-danger"
@@ -197,14 +197,14 @@ export default function Jogos() {
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+                      className="px-2.5 py-1.5 text-[0.65rem]tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
                       onClick={() => abrirEditar(jogo)}
                     >
                       Editar
                     </button>
 
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
                       onClick={() => excluir(jogo.id)}
                     >
                       Excluir
@@ -223,7 +223,7 @@ export default function Jogos() {
           onClose={() => setModal(false)}
         >
           <div className="mb-4">
-            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+            <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Título
             </label>
 
@@ -241,7 +241,7 @@ export default function Jogos() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+              <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
                 Gênero
               </label>
 
@@ -260,7 +260,7 @@ export default function Jogos() {
             </div>
 
             <div>
-              <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+              <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
                 Plataforma
               </label>
 
@@ -280,7 +280,7 @@ export default function Jogos() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+            <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Quantidade
             </label>
 
@@ -297,14 +297,14 @@ export default function Jogos() {
 
           <div className="flex gap-3 justify-end mt-6 pt-4 border-t border-border">
             <button
-              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
               onClick={() => setModal(false)}
             >
               Cancelar
             </button>
 
             <button
-              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
               onClick={salvar}
             >
               Salvar

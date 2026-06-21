@@ -84,13 +84,13 @@ export default function Usuarios() {
     <div>
       <div className="flex items-end justify-between mb-8 pb-4 border-b border-border">
         <div>
-          <div className="font-display text-2xl font-bold text-neon tracking-[0.1em] [text-shadow:0_0_15px_var(--color-neon)]">
+          <div className="font-display text-2xl font-bold text-neon tracking-widest [text-shadow:0_0_15px_var(--color-neon)]">
             Usuários
           </div>
         </div>
 
         <button
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
           onClick={abrirNovo}
         >
           + Novo usuário
@@ -115,20 +115,20 @@ export default function Usuarios() {
 
           <tbody>
             {usuarios.map((u) => (
-              <tr key={u.id} className="border-b border-border last:border-b-0 hover:bg-neon/[0.03] transition-colors">
+              <tr key={u.id} className="border-b border-border last:border-b-0 hover:bg-neon/3 transition-colors">
                 <td className="px-4 py-3 text-ink">{u.nome ?? u.name}</td>
                 <td className="px-4 py-3 text-ink">{u.email}</td>
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
                       onClick={() => abrirEdicao(u)}
                     >
                       Editar
                     </button>
 
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
                       onClick={() => excluir(u.id)}
                     >
                       Excluir
@@ -153,7 +153,7 @@ export default function Usuarios() {
           )}
 
           <div className="mb-4">
-            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+            <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Nome
             </label>
             <input
@@ -164,7 +164,7 @@ export default function Usuarios() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+            <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               E-mail
             </label>
             <input
@@ -175,7 +175,7 @@ export default function Usuarios() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-[0.65rem] uppercase tracking-[0.1em] text-dim mb-1.5">
+            <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Telefone
             </label>
             <input
@@ -187,14 +187,14 @@ export default function Usuarios() {
 
           <div className="flex gap-3 justify-end mt-6 pt-4 border-t border-border">
             <button
-              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
               onClick={() => setModal(false)}
             >
               Cancelar
             </button>
 
             <button
-              className="px-4 py-2 text-xs tracking-[0.1em] uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
               onClick={salvar}
             >
               Salvar

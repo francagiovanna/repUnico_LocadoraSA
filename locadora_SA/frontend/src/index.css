@@ -1,6 +1,6 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=VT323&display=swap');
+
+@import "tailwindcss";
 
 @theme {
   --color-surface: #0a0a0f;

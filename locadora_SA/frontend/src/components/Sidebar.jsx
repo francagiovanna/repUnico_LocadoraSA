@@ -7,9 +7,9 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
   ];
 
   return (
-    <aside className="relative z-10 w-[220px] flex flex-col py-6 bg-panel border-r border-border after:content-[''] after:absolute after:right-0 after:top-0 after:bottom-0 after:w-px after:bg-gradient-to-b after:from-transparent after:via-neon after:to-transparent after:opacity-50">
+    <aside className="relative z-10 w-55 flex flex-col py-6 bg-panel border-r border-border after:content-[''] after:absolute after:right-0 after:top-0 after:bottom-0 after:w-px after:bg-linear-to-b after:from-transparent after:via-neon after:to-transparent after:opacity-50">
       <div className="text-center px-4 pb-6 border-b border-border">
-        <h1 className="font-display text-[0.85rem] font-black text-neon tracking-[0.1em] leading-snug [text-shadow:0_0_10px_var(--color-neon)]">
+        <h1 className="font-display text-[0.85rem] font-black text-neon tracking-widest leading-snug [text-shadow:0_0_10px_var(--color-neon)]">
           LOCADORA
         </h1>
         <span className="font-retro text-base text-neon-2 [text-shadow:0_0_8px_var(--color-neon-2)]">
@@ -24,10 +24,10 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
             <button
               key={item.id}
               onClick={() => setPage(item.id)}
-              className={`w-full flex items-center gap-3 px-6 py-3 text-left text-[0.8rem] tracking-[0.1em] uppercase border-l-[3px] transition-all duration-150 font-mono bg-transparent ${
+              className={`w-full flex items-center gap-3 px-6 py-3 text-left text-[0.8rem] tracking-widest uppercase border-l-[3px] transition-all duration-150 font-mono bg-transparent ${
                 active
                   ? "text-neon border-l-neon bg-neon/[0.07] [text-shadow:0_0_8px_var(--color-neon)]"
-                  : "text-dim border-l-transparent hover:text-ink hover:bg-neon/[0.04]"
+                  : "text-dim border-l-transparent hover:text-ink hover:bg-neon/4"
               }`}
             >
               <span className="text-base">{item.icon}</span>
@@ -45,7 +45,7 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
 
         <button
           onClick={onLogout}
-          className="w-full py-2 bg-transparent border border-danger text-danger font-mono text-[0.7rem] tracking-[0.1em] uppercase cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+          className="w-full py-2 bg-transparent border border-danger text-danger font-mono text-[0.7rem] tracking-widest uppercase cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
         >
           ⏻ Sair
         </button>
