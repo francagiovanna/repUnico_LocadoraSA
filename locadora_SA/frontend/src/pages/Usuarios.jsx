@@ -8,7 +8,7 @@ import {
 } from "../services/api";
 
 const emptyForm = {
-  nome: "",
+  name: "",
   email: "",
   phone: "",
 };
@@ -52,7 +52,7 @@ export default function Usuarios() {
   }
 
   async function salvar() {
-    if (!form.nome || !form.email) {
+    if (!form.name || !form.email) {
       setErro("Nome e e-mail são obrigatórios.");
       return;
     }
@@ -158,7 +158,7 @@ export default function Usuarios() {
             </label>
             <input
               className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
-              value={form.nome}
+              value={form.name}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
             />
           </div>
