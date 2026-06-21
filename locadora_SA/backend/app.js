@@ -1,23 +1,20 @@
-import express from "express";
-import cors from "cors";
-import {
-  getAllAnimals,
-  createAnimal,
-  deleteAnimal,
-} from "./controller/animalController.js";
+import express from 'express'
+import cors from 'cors'
+import gamesRoutes from './routes/jogos.routes.js'
+import customersRoutes from './routes/usuarios.routes.js'
+import rentalsRoutes from './routes/alugueis.routes.js'
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-// Routes
-app.get("/animals", getAllAnimals);
-app.post("/animals", createAnimal);
-app.delete("/animals/:id", deleteAnimal);
+app.use('/games', gamesRoutes)
+app.use('/customers', customersRoutes)
+app.use('/rentals', rentalsRoutes)
 
-// Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.get('/', (req, res) => {
+  res.json({ mensagem: '🎮 API Locadora S/A rodando!' })
+})
+
+export default app
