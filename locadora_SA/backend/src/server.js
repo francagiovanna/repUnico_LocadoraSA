@@ -1,3 +1,7 @@
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+
 import gamesRoutes from './routes/games.routes.js'
 import customersRoutes from './routes/customers.routes.js'
 import rentalsRoutes from './routes/rentals.routes.js'
@@ -15,11 +19,11 @@ app.use('/customers', customersRoutes)
 app.use('/rentals', rentalsRoutes)
 
 app.get('/', (req, res) => {
-  res.json({ mensagem: '🎮 API Locadora S/A rodando!' })
+  res.json({
+    mensagem: '🎮 API Locadora S/A rodando!'
+  })
 })
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`)
 })
-
-export default app
