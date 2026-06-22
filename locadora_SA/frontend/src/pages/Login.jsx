@@ -53,12 +53,13 @@ export default function Login({ onLogin }) {
               E-mail
             </label>
 
-            <input
-              type="email"
-              className="w-full bg-surface-3 border border-border text-ink px-3 py-2.5 outline-none focus:border-neon"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+           <input
+  type="email"
+  placeholder="Email"
+  className="w-full bg-surface-3 border border-border text-ink px-3 py-2.5 outline-none focus:border-neon"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
           </div>
 
           <div className="mb-6">
@@ -67,11 +68,12 @@ export default function Login({ onLogin }) {
             </label>
 
             <input
-              type="password"
-              className="w-full bg-surface-3 border border-border text-ink px-3 py-2.5 outline-none focus:border-neon"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-            />
+  type="password"
+  placeholder="Senha"
+  className="w-full bg-surface-3 border border-border text-ink px-3 py-2.5 outline-none focus:border-neon"
+  value={senha}
+  onChange={(e) => setSenha(e.target.value)}
+/>
           </div>
 
           <button

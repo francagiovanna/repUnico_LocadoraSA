@@ -42,13 +42,11 @@ export default function Usuarios() {
 
   function abrirEdicao(usuario) {
     setEditandoId(usuario.id);
-
     setForm({
       nome: usuario.nome || "",
       email: usuario.email || "",
       telefone: usuario.telefone || "",
     });
-
     setErro("");
     setModal(true);
   }
@@ -67,7 +65,7 @@ export default function Usuarios() {
       }
 
       setModal(false);
-      carregar();
+      await carregar();
     } catch (err) {
       setErro(err.message || "Erro ao salvar usuário.");
     }
@@ -78,7 +76,9 @@ export default function Usuarios() {
 
     try {
       await excluirUsuario(id);
-      carregar();
+
+      // ✔️ CORREÇÃO IMPORTANTE PARA O TESTE PASSAR
+      await carregar();
     } catch (err) {
       setErro("Erro ao excluir usuário.");
     }
@@ -86,11 +86,10 @@ export default function Usuarios() {
 
   return (
     <div>
+      {/* HEADER */}
       <div className="flex items-end justify-between mb-8 pb-4 border-b border-border">
-        <div>
-          <div className="font-display text-2xl font-bold text-neon tracking-widest [text-shadow:0_0_15px_var(--color-neon)]">
-            Usuários
-          </div>
+        <div className="font-display text-2xl font-bold text-neon tracking-widest [text-shadow:0_0_15px_var(--color-neon)]">
+          Usuários
         </div>
 
         <button
@@ -101,12 +100,14 @@ export default function Usuarios() {
         </button>
       </div>
 
+      {/* ERRO */}
       {erro && !modal && (
         <div className="bg-danger/10 border border-danger text-danger text-xs px-3 py-2 mb-4">
           {erro}
         </div>
       )}
 
+      {/* TABELA */}
       <div className="bg-panel border border-border overflow-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
@@ -133,27 +134,24 @@ export default function Usuarios() {
             {usuarios.map((u) => (
               <tr
                 key={u.id}
+                data-testid="usuario-row"
                 className="border-b border-border last:border-b-0 hover:bg-neon/3 transition-colors"
               >
                 <td className="px-4 py-3 text-ink">{u.nome}</td>
-
                 <td className="px-4 py-3 text-ink">{u.email}</td>
-
-                <td className="px-4 py-3 text-ink">
-                  {u.telefone || "-"}
-                </td>
+                <td className="px-4 py-3 text-ink">{u.telefone || "-"}</td>
 
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-neon text-neon bg-transparent"
                       onClick={() => abrirEdicao(u)}
                     >
                       Editar
                     </button>
 
                     <button
-                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+                      className="px-2.5 py-1.5 text-[0.65rem] tracking-widest uppercase border border-danger text-danger bg-transparent"
                       onClick={() => excluir(u.id)}
                     >
                       Excluir
@@ -166,6 +164,7 @@ export default function Usuarios() {
         </table>
       </div>
 
+      {/* MODAL */}
       {modal && (
         <Modal
           title={editandoId ? "Editar usuário" : "Novo usuário"}
@@ -183,7 +182,8 @@ export default function Usuarios() {
             </label>
 
             <input
-              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+              data-testid="input-nome"
+              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none"
               value={form.nome}
               onChange={(e) =>
                 setForm({ ...form, nome: e.target.value })
@@ -197,7 +197,8 @@ export default function Usuarios() {
             </label>
 
             <input
-              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+              data-testid="input-email"
+              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none"
               value={form.email}
               onChange={(e) =>
                 setForm({ ...form, email: e.target.value })
@@ -211,7 +212,8 @@ export default function Usuarios() {
             </label>
 
             <input
-              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
+              data-testid="input-telefone"
+              className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none"
               value={form.telefone}
               onChange={(e) =>
                 setForm({ ...form, telefone: e.target.value })
@@ -221,14 +223,14 @@ export default function Usuarios() {
 
           <div className="flex gap-3 justify-end mt-6 pt-4 border-t border-border">
             <button
-              className="px-4 py-2 text-xs tracking-widest uppercase border border-danger text-danger bg-transparent cursor-pointer transition-all duration-150 hover:bg-danger hover:text-white hover:shadow-[0_0_12px_var(--color-danger)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-danger text-danger"
               onClick={() => setModal(false)}
             >
               Cancelar
             </button>
 
             <button
-              className="px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon bg-transparent cursor-pointer transition-all duration-150 hover:bg-neon hover:text-surface hover:shadow-[0_0_16px_var(--color-neon)]"
+              className="px-4 py-2 text-xs tracking-widest uppercase border border-neon text-neon"
               onClick={salvar}
             >
               Salvar
