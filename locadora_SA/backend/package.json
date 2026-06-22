@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test": "jest --experimental-vm-modules"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --no-coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
   },
   "dependencies": {
     "cors": "^2.8.5",
