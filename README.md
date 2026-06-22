@@ -21,7 +21,7 @@ Sistema web completo para gerenciamento de uma locadora de jogos retrô, com cad
 
 ---
 
-## 📋 Requisitos Funcionais Implementados
+## Requisitos Funcionais Implementados
 
 | RF | Descrição | Status |
 |----|-----------|--------|
@@ -42,7 +42,7 @@ Sistema web completo para gerenciamento de uma locadora de jogos retrô, com cad
 
 ---
 
-## 🗂️ Estrutura do Repositório
+## Estrutura do Repositório
 
 ```
 locadora_SA/
@@ -103,7 +103,7 @@ locadora_SA/
 
 ---
 
-## ⚙️ Como Rodar o Projeto
+## Como Rodar o Projeto
 
 ### Pré-requisitos
 
@@ -169,7 +169,7 @@ Credenciais de acesso:
 
 ---
 
-## 🧪 Testes
+## Testes
 
 ### Testes de API (Jest + Supertest)
 
@@ -197,7 +197,7 @@ npm run test:report
 
 ---
 
-## 🔌 Endpoints da API
+## Endpoints da API
 
 ### Usuários (Customers)
 
@@ -231,7 +231,7 @@ npm run test:report
 
 ---
 
-## 🎨 Identidade Visual
+## Identidade Visual
 
 Interface com tema **cyberpunk/neon retro**, inspirada em telas de arcade dos anos 80/90. Paleta de cores e fontes registradas como tokens do Tailwind v4 via `@theme` em `index.css`:
 
@@ -242,7 +242,7 @@ Interface com tema **cyberpunk/neon retro**, inspirada em telas de arcade dos an
 
 ---
 
-## 📄 Documentação
+## Documentação
 
 | Documento | Descrição |
 |-----------|-----------|
