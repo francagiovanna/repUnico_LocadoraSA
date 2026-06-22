@@ -1,29 +1,50 @@
 const API_URL = "http://localhost:3000";
 
 async function request(path, options = {}) {
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: { "Content-Type": "application/json" },
-    ...options,
-  });
-  if (!response.ok) {
-    const erro = await response.json().catch(() => ({}));
-    throw new Error(erro.message || `Erro na requisição: ${response.status}`);
+  try {
+    const response = await fetch(`${API_URL}${path}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      ...options,
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      throw new Error(
+        data?.erro ||
+        data?.message ||
+        "Ocorreu um erro."
+      );
+    }
+
+    return data;
+  } catch (error) {
+    if (
+      error.message.includes("fetch") ||
+      error.message.includes("Failed")
+    ) {
+      throw new Error(
+        "Não foi possível conectar ao servidor."
+      );
+    }
+
+    throw error;
   }
-  if (response.status === 204) return null;
-  return response.json();
 }
 
-// =====================================================================
-// JOGOS — back fala "games" (title, genre, platform, daily_price, stock)
-// front fala "jogos" (titulo, genero, plataforma, valorDiaria, estoque)
-// =====================================================================
+/* =====================================================
+   JOGOS
+===================================================== */
+
 function jogoParaApi(jogo) {
   return {
     title: jogo.titulo,
     genre: jogo.genero,
     platform: jogo.plataforma,
-    daily_price: jogo.valorDiaria,
-    stock: jogo.estoque,
+    daily_price: Number(jogo.valorDiaria),
+    stock: Number(jogo.estoque),
   };
 }
 
@@ -38,81 +59,122 @@ function jogoDaApi(jogo) {
   };
 }
 
-export const getJogos = async () => {
+export async function getJogos() {
   const jogos = await request("/games");
   return jogos.map(jogoDaApi);
-};
-export const criarJogo = (jogo) =>
-  request("/games", { method: "POST", body: JSON.stringify(jogoParaApi(jogo)) });
-export const atualizarJogo = (id, jogo) =>
-  request(`/games/${id}`, { method: "PUT", body: JSON.stringify(jogoParaApi(jogo)) });
-export const excluirJogo = (id) => request(`/games/${id}`, { method: "DELETE" });
+}
 
-// =====================================================================
-// ALUGUÉIS — back fala "rentals" (game_id, customer_id, due_date, ...)
-// front fala "alugueis" (jogoId, clienteId, dataDevolucao, ...)
-// =====================================================================
-function aluguelDaApi(a) {
+export async function criarJogo(jogo) {
+  return request("/games", {
+    method: "POST",
+    body: JSON.stringify(jogoParaApi(jogo)),
+  });
+}
+
+export async function atualizarJogo(id, jogo) {
+  return request(`/games/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(jogoParaApi(jogo)),
+  });
+}
+
+export async function excluirJogo(id) {
+  return request(`/games/${id}`, {
+    method: "DELETE",
+  });
+}
+
+/* =====================================================
+   CLIENTES / USUÁRIOS
+===================================================== */
+
+function clienteDaApi(cliente) {
   return {
-    id: a.id,
-    cliente: a.customer,
-    jogo: a.game,
-    plataforma: a.platform,
-    dataRetirada: a.rented_at,
-    dataDevolucao: a.due_date,
-    dataFinalizacao: a.returned_at,
-    valorTotal: a.total_price,
+    id: cliente.id,
+    nome: cliente.name,
+    email: cliente.email,
+    telefone: cliente.phone,
   };
 }
 
-export const getAlugueis = async () => {
-  const alugueis = await request("/rentals");
-  return alugueis.map(aluguelDaApi);
-};
-export const criarAluguel = ({ jogoId, clienteId, dataDevolucao }) =>
-  request("/rentals", {
-    method: "POST",
-    body: JSON.stringify({
-      game_id: jogoId,
-      customer_id: clienteId,
-      due_date: dataDevolucao,
-    }),
-  });
-export const encerrarAluguel = (id) =>
-  request(`/rentals/${id}/return`, { method: "PATCH" });
-
-// =====================================================================
-// CLIENTES — back fala "customers" (name, email, phone)
-// usado no select de "novo aluguel" por enquanto
-// =====================================================================
-function clienteDaApi(c) {
-  return { id: c.id, nome: c.name, email: c.email, telefone: c.phone };
-}
-
-export const getClientes = async () => {
+export async function getClientes() {
   const clientes = await request("/customers");
   return clientes.map(clienteDaApi);
-};
+}
 
-// =====================================================================
-// USUÁRIOS (RF07/08/11/12) — PENDENTE de decisão de arquitetura
-// (usuários do sistema vs. clientes que alugam jogos).
-// Por enquanto aponta pra /customers, mesma tradução de Clientes acima.
-// Revisar quando definirmos login/cadastro real.
-// =====================================================================
-export const getUsuarios = async () => {
+export async function getUsuarios() {
   const usuarios = await request("/customers");
   return usuarios.map(clienteDaApi);
-};
-export const criarUsuario = (usuario) =>
-  request("/customers", {
+}
+
+export async function criarUsuario(usuario) {
+  return request("/customers", {
     method: "POST",
-    body: JSON.stringify({ name: usuario.nome, email: usuario.email, phone: usuario.telefone }),
+    body: JSON.stringify({
+      name: usuario.nome,
+      email: usuario.email,
+      phone: usuario.telefone,
+    }),
   });
-export const atualizarUsuario = (id, usuario) =>
-  request(`/customers/${id}`, {
+}
+
+export async function atualizarUsuario(id, usuario) {
+  return request(`/customers/${id}`, {
     method: "PUT",
-    body: JSON.stringify({ name: usuario.nome, email: usuario.email, phone: usuario.telefone }),
+    body: JSON.stringify({
+      name: usuario.nome,
+      email: usuario.email,
+      phone: usuario.telefone,
+    }),
   });
-export const excluirUsuario = (id) =>
-  request(`/customers/${id}`, { method: "DELETE" });
+}
+
+export async function excluirUsuario(id) {
+  return request(`/customers/${id}`, {
+    method: "DELETE",
+  });
+}
+
+/* =====================================================
+   ALUGUÉIS
+===================================================== */
+
+function aluguelDaApi(aluguel) {
+  return {
+    id: aluguel.id,
+    cliente: aluguel.customer,
+    jogo: aluguel.game,
+    plataforma: aluguel.platform,
+    dataRetirada: aluguel.rented_at,
+    dataDevolucao: aluguel.due_date,
+    dataFinalizacao: aluguel.returned_at,
+    valorTotal: aluguel.total_price,
+    status: aluguel.status,
+  };
+}
+
+export async function getAlugueis() {
+  const alugueis = await request("/rentals");
+  return alugueis.map(aluguelDaApi);
+}
+
+export async function criarAluguel({
+  game_id,
+  customer_id,
+  due_date,
+}) {
+  return request("/rentals", {
+    method: "POST",
+    body: JSON.stringify({
+      game_id: Number(game_id),
+      customer_id: Number(customer_id),
+      due_date,
+    }),
+  });
+}
+
+export async function encerrarAluguel(id) {
+  return request(`/rentals/${id}/return`, {
+    method: "PATCH",
+  });
+}
