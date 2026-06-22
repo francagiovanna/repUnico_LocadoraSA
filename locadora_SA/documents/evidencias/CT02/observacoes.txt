@@ -1,0 +1,14 @@
+Falhas encontradas durante execução:
+
+Dependência de validação baseada apenas em mensagem visual de erro.
+Possível variação do texto exibido pelo sistema em casos de login inválido.
+Necessidade de garantir que o usuário permaneça na tela de login após falha.
+
+Correções aplicadas:
+
+Ajuste do teste para validação por presença de mensagem de erro genérica.
+Melhoria na verificação de bloqueio de acesso ao dashboard.
+Uso de seletores mais flexíveis para evitar falhas por mudança de texto.
+
+Observação final:
+O sistema se comporta corretamente ao impedir autenticação com credenciais inválidas, atendendo ao requisito funcional de segurança.

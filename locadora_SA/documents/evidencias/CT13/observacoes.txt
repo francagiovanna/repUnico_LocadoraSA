@@ -1,0 +1,2 @@
+Observações:
+O teste exigiu ajuste na sincronização entre abertura do modal e acesso ao campo de e-mail. Antes da correção, o input não era encontrado por inconsistência no carregamento do modal após o clique na linha. Após garantir a abertura correta do modal e a atualização da lista após salvar, o fluxo passou a ser estável.

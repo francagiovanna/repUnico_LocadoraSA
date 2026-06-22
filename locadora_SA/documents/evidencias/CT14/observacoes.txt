@@ -1,0 +1,2 @@
+Observações:
+O problema inicial estava na atualização da lista após a exclusão. A UI não era atualizada a tempo da verificação, causando falha na validação de ausência do registro. Após garantir o recarregamento da lista após a operação de delete, o teste passou a validar corretamente a remoção do usuário.

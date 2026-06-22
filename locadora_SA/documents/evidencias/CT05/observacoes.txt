@@ -1,0 +1,6 @@
+Observações
+A validação de campo obrigatório para “Título” agora está funcionando corretamente.
+O backend foi reforçado para impedir persistência de dados inválidos.
+O frontend passou a bloquear o envio quando o campo está vazio ou inválido.
+O teste anteriormente falhava porque o sistema permitia criação de registros sem validação adequada.
+O fluxo de modal permanece aberto em caso de erro, mantendo o usuário na tela de cadastro.

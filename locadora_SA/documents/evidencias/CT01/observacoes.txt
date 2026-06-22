@@ -1,0 +1,14 @@
+Falhas encontradas durante execução:
+
+Falta inicial de importação do expect no helpers.js.
+Uso de validação baseada em texto genérico do body, podendo variar conforme a tela pós-login.
+Dependência de elementos da interface que podem mudar conforme refatoração do layout.
+
+Correções aplicadas:
+
+Inclusão do import correto do Playwright (expect) no helpers.js.
+Ajuste do fluxo de espera com networkidle para estabilização da página.
+Melhoria na confiabilidade do fluxo de autenticação no teste automatizado.
+
+Observação final:
+O teste depende de elementos visuais da interface, portanto futuras alterações no layout podem exigir ajuste nos seletores utilizados.

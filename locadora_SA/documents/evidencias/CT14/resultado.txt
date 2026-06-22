@@ -1,0 +1,2 @@
+Resultado:
+Executado com sucesso. O usuário foi selecionado na listagem, a exclusão foi confirmada via diálogo e o registro foi removido da tabela após atualização da interface.

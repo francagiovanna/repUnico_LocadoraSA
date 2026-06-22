@@ -1,0 +1,1 @@
+Observações: o principal ajuste necessário foi garantir a abertura do modal antes da interação e o clique explícito no botão de salvar. Também foi necessário selecionar opções válidas nos campos de cliente e jogo, além de preencher a data de devolução. A validação final pela presença de linha na tabela mostrou-se adequada para confirmar o sucesso da operação.

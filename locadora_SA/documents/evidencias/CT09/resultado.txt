@@ -1,0 +1,7 @@
+Resultado (o que seu teste validou agora)
+Usuário foi criado via modal
+API retornou sucesso
+Lista foi atualizada (carregar())
+Novo usuário aparece na tabela
+
+CT09 APROVADO

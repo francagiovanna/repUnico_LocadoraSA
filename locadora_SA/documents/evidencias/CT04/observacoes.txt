@@ -1,0 +1,14 @@
+Observações:
+Falhas encontradas durante execução:
+
+Seletores do Playwright incompatíveis com a estrutura atual do formulário.
+Conflito entre campos de busca e campos do modal durante o preenchimento automatizado.
+A validação final era executada antes da atualização completa da tabela.
+Necessidade de sincronização entre o salvamento e a renderização dos dados.
+
+Correções aplicadas:
+
+Ajuste dos seletores para utilizar os campos corretos do modal.
+Atualização do fluxo automatizado para preencher apenas os inputs necessários.
+Inclusão de espera adequada após o salvamento.
+Alteração da validação final para conferir o conteúdo efetivamente renderizado.

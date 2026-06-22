@@ -1,0 +1,10 @@
+Resultado:
+Aprovado.
+
+Status: PASS
+
+Resultado final:
+O sistema bloqueou o acesso com credenciais inválidas, mantendo o usuário na tela de login e impedindo a entrada na área autenticada.
+
+Tempo de execução:
+Dentro do limite esperado para o fluxo de autenticação.

@@ -1,0 +1,6 @@
+Resultado (CT05 — Cadastrar jogo sem nome RF03)
+
+O caso de teste foi executado e validado com sucesso. Ao tentar cadastrar um jogo sem preencher o campo “Título”, o sistema impediu a criação do registro. A tabela de jogos permaneceu inalterada e nenhum novo item foi adicionado. O comportamento está de acordo com o requisito funcional.
+
+Status: Aprovado (PASS)
+Tempo de execução: dentro do esperado pelo fluxo de testes automatizados.

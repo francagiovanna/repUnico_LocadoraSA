@@ -1,0 +1,1 @@
+Resultado: aprovado. O fluxo de criação de aluguel funcionou corretamente após a abertura do modal, preenchimento dos campos obrigatórios e envio do formulário. O sistema registrou o aluguel e a listagem foi atualizada, permitindo a validação da presença de uma nova linha na tabela.

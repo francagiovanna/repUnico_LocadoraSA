@@ -1,0 +1,1 @@
+Resultado: aprovado. O teste conseguiu acessar a tela de usuários, aguardar o carregamento da interface e identificar pelo menos um registro na tabela. Isso confirma que a listagem está sendo renderizada corretamente após o carregamento dos dados da API, sem necessidade de interação adicional.

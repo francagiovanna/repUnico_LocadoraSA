@@ -1,0 +1,2 @@
+Resultado:
+Executado com sucesso. O usuário foi selecionado na listagem, o modal de edição foi aberto corretamente, o e-mail foi alterado e a atualização foi confirmada na interface após salvar.

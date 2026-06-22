@@ -1,0 +1,13 @@
+Observações importantes do CT09 (pra não quebrar depois)
+O sistema usa API real (getUsuarios, criarUsuario)
+O dado não é mockado
+O nome do usuário pode mudar a cada execução (timestamp no teste)
+O teste depende de:
+render da tabela
+resposta da API
+atualização do estado React
+
+Fragilidade atual:
+
+Se API demorar → teste pode falhar
+Se backend retornar formato diferente → quebra
