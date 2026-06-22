@@ -142,9 +142,9 @@ export async function excluirUsuario(id) {
 function aluguelDaApi(aluguel) {
   return {
     id: aluguel.id,
-    cliente: aluguel.customer,
-    jogo: aluguel.game,
-    plataforma: aluguel.platform,
+    cliente: aluguel.customer?.name,
+    jogo: aluguel.game?.title,
+    plataforma: aluguel.game?.platform,
     dataRetirada: aluguel.rented_at,
     dataDevolucao: aluguel.due_date,
     dataFinalizacao: aluguel.returned_at,
