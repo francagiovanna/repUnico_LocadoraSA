@@ -11,16 +11,22 @@ export const getGameById = async (id) => {
 }
 
 export const createGame = async ({ title, genre, platform, daily_price, stock }) => {
-  if (!title || !genre || !platform || !daily_price) {
-    throw new Error('Campos obrigatórios: title, genre, platform, daily_price')
-  }
+ if (
+  !title || !title.trim() ||
+  !genre || !genre.trim() ||
+  !platform || !platform.trim() ||
+  daily_price === undefined || daily_price === null
+) {
+  throw new Error("Campos obrigatórios: title, genre, platform, daily_price");
+}
 
   const result = await pool.query(
     'INSERT INTO games (title, genre, platform, daily_price, stock) VALUES ($1, $2, $3, $4, $5) RETURNING *',
     [title, genre, platform, daily_price, stock ?? 1]
-  )
-  return result.rows[0]
-}
+  );
+
+  return result.rows[0];
+};
 
 export const updateGame = async (id, { title, genre, platform, daily_price, stock }) => {
   const result = await pool.query(
