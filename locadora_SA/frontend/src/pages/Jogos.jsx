@@ -63,23 +63,31 @@ export default function Jogos() {
     setModal(true);
   }
 
-  async function salvar() {
-    if (!form.titulo || !form.genero || !form.plataforma || !form.valorDiaria) {
-      setErro("Preencha título, gênero, plataforma e valor da diária.");
-      return;
-    }
-    try {
-      if (editando) {
-        await atualizarJogo(editando, form);
-      } else {
-        await criarJogo(form);
-      }
-      setModal(false);
-      carregar();
-    } catch (err) {
-      setErro(err.message);
-    }
+async function salvar() {
+  if (!form.titulo || !form.genero || !form.plataforma || !form.valorDiaria) {
+    setErro("Preencha título, gênero, plataforma e valor da diária.");
+    return;
   }
+
+  try {
+    const payload = {
+      ...form,
+      valorDiaria: Number(form.valorDiaria),
+      estoque: Number(form.estoque),
+    };
+
+    if (editando) {
+      await atualizarJogo(editando, payload);
+    } else {
+      await criarJogo(payload);
+    }
+
+    setModal(false);
+    carregar();
+  } catch (err) {
+    setErro(err.message);
+  }
+}
 
   async function excluir(id) {
     if (!confirm("Excluir este jogo?")) return;

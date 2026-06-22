@@ -8,9 +8,9 @@ import {
 } from "../services/api";
 
 const emptyForm = {
-  name: "",
+  nome: "",
   email: "",
-  phone: "",
+  telefone: "",
 };
 
 export default function Usuarios() {
@@ -42,17 +42,19 @@ export default function Usuarios() {
 
   function abrirEdicao(usuario) {
     setEditandoId(usuario.id);
+
     setForm({
-      nome: usuario.nome ?? usuario.name ?? "",
-      email: usuario.email,
-      phone: usuario.phone ?? "",
+      nome: usuario.nome || "",
+      email: usuario.email || "",
+      telefone: usuario.telefone || "",
     });
+
     setErro("");
     setModal(true);
   }
 
   async function salvar() {
-    if (!form.name || !form.email) {
+    if (!form.nome || !form.email) {
       setErro("Nome e e-mail são obrigatórios.");
       return;
     }
@@ -63,6 +65,7 @@ export default function Usuarios() {
       } else {
         await criarUsuario(form);
       }
+
       setModal(false);
       carregar();
     } catch (err) {
@@ -72,6 +75,7 @@ export default function Usuarios() {
 
   async function excluir(id) {
     if (!confirm("Excluir este usuário?")) return;
+
     try {
       await excluirUsuario(id);
       carregar();
@@ -107,17 +111,38 @@ export default function Usuarios() {
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="bg-surface-3 border-b border-border">
-              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Nome</th>
-              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">E-mail</th>
-              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">Ações</th>
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">
+                Nome
+              </th>
+
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">
+                E-mail
+              </th>
+
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">
+                Telefone
+              </th>
+
+              <th className="px-4 py-3 text-left font-display text-[0.6rem] tracking-[0.15em] uppercase text-neon">
+                Ações
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {usuarios.map((u) => (
-              <tr key={u.id} className="border-b border-border last:border-b-0 hover:bg-neon/3 transition-colors">
-                <td className="px-4 py-3 text-ink">{u.nome ?? u.name}</td>
+              <tr
+                key={u.id}
+                className="border-b border-border last:border-b-0 hover:bg-neon/3 transition-colors"
+              >
+                <td className="px-4 py-3 text-ink">{u.nome}</td>
+
                 <td className="px-4 py-3 text-ink">{u.email}</td>
+
+                <td className="px-4 py-3 text-ink">
+                  {u.telefone || "-"}
+                </td>
+
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
@@ -156,10 +181,13 @@ export default function Usuarios() {
             <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Nome
             </label>
+
             <input
               className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              value={form.nome}
+              onChange={(e) =>
+                setForm({ ...form, nome: e.target.value })
+              }
             />
           </div>
 
@@ -167,10 +195,13 @@ export default function Usuarios() {
             <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               E-mail
             </label>
+
             <input
               className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, email: e.target.value })
+              }
             />
           </div>
 
@@ -178,10 +209,13 @@ export default function Usuarios() {
             <label className="block text-[0.65rem] uppercase tracking-widest text-dim mb-1.5">
               Telefone
             </label>
+
             <input
               className="w-full bg-surface-3 border border-border text-ink font-mono text-sm px-3 py-2.5 outline-none focus:border-neon focus:shadow-[0_0_8px_rgba(0,255,231,0.2)]"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              value={form.telefone}
+              onChange={(e) =>
+                setForm({ ...form, telefone: e.target.value })
+              }
             />
           </div>
 
