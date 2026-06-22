@@ -27,8 +27,12 @@
 }
 
 @keyframes gridScroll {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(40px); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(40px);
+  }
 }
 
 body {
@@ -40,7 +44,7 @@ body {
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background: repeating-linear-gradient(
@@ -52,4 +56,22 @@ body::after {
   );
   pointer-events: none;
   z-index: 9999;
+}
+
+/* ========================= */
+/* CORREÇÃO DOS SELECTS */
+/* ========================= */
+
+select {
+  background: #13131f;
+  color: #c8d8e8;
+}
+
+select option {
+  background: #13131f;
+  color: #c8d8e8;
+}
+
+input[type="date"] {
+  color: #c8d8e8;
 }
