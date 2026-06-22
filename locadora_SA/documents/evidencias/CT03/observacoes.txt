@@ -1,0 +1,17 @@
+Caso de teste: CT03 — Cadastro de jogo (RF03)
+
+Resultado:
+Aprovado.
+
+Falhas encontradas durante execução:
+- Diretório do Playwright apontando para pasta inexistente.
+- Seletores incompatíveis após refatoração da interface.
+- Inputs sem associação por label.
+
+Correções aplicadas:
+- Ajuste do testDir.
+- Atualização dos seletores.
+- Inclusão dos campos obrigatórios no fluxo automatizado.
+
+Resultado final:
+Cadastro executado com sucesso.

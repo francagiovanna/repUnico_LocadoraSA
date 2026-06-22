@@ -1,0 +1,11 @@
+Resultado obtido:
+
+O caso de teste foi executado com sucesso. O sistema realizou o fluxo de cadastro de jogo conforme esperado: autenticação do usuário, acesso à tela de Jogos, abertura do modal, preenchimento dos campos obrigatórios e finalização da operação sem erros.
+
+Status: Aprovado (PASS)
+
+Tempo de execução: 6,2 segundos.
+
+Conclusão:
+
+O requisito funcional de cadastro de jogos foi validado com sucesso.
