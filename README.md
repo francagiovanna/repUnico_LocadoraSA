@@ -75,7 +75,6 @@ locadora_SA/
 │   │   ├── components/
 │   │   │   ├── Modal.jsx
 │   │   │   ├── Sidebar.jsx
-│   │   │   └── Table.jsx
 │   │   ├── pages/
 │   │   │   ├── Alugueis.jsx
 │   │   │   ├── Dashboard.jsx

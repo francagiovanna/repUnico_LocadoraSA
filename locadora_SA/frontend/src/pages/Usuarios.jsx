@@ -77,7 +77,7 @@ export default function Usuarios() {
     try {
       await excluirUsuario(id);
 
-      // ✔️ CORREÇÃO IMPORTANTE PARA O TESTE PASSAR
+      // CORREÇÃO IMPORTANTE PARA O TESTE PASSAR
       await carregar();
     } catch (err) {
       setErro("Erro ao excluir usuário.");
