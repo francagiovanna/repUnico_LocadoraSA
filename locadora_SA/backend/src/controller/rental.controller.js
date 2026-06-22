@@ -2,7 +2,7 @@ import {
   getAllRentals,
   createRental,
   returnRental
-} from '../services/alugueis.service.js'
+} from '../services/rental.service.js'
 
 export const listarAlugueis = async (req, res) => {
   try {

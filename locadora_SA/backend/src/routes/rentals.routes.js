@@ -4,7 +4,7 @@ import {
   listarAlugueis,
   criarAluguel,
   devolverAluguel
-} from '../controllers/rentals.controller.js'
+} from '../controller/rental.controller.js'
 
 const router = Router()
 

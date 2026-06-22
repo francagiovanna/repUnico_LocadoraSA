@@ -4,7 +4,7 @@ import {
   createGame,
   updateGame,
   deleteGame
-} from '../services/jogos.service.js'
+} from '../services/games.service.js'
 
 export const listarJogos = async (req, res) => {
   try {

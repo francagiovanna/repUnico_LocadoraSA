@@ -4,7 +4,7 @@ import {
   createCustomer,
   updateCustomer,
   deleteCustomer
-} from '../services/usuarios.service.js'
+} from '../services/customers.service.js'
 
 export const listarClientes = async (req, res) => {
   try {
