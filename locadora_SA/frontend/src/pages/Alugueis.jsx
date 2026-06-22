@@ -63,7 +63,7 @@ export default function Alugueis() {
     try {
       await criarAluguel(form);
       setModal(false);
-      carregar();
+      await carregar();
     } catch (err) {
       setErro(err.message || "Erro ao criar aluguel");
     }
@@ -80,21 +80,8 @@ export default function Alugueis() {
     }
   }
 
-  const ativos = alugueis.filter(
-    (a) => !a.dataFinalizacao
-  );
-
-  const finalizados = alugueis.filter(
-    (a) => a.dataFinalizacao
-  );
-
-  console.log("ALUGUEL 1:", alugueis[0]);
-
-  console.log("CLIENTES:", clientes);
-  console.log("CLIENTE 1:", clientes[0]);
-
-  console.log("JOGOS:", jogos);
-  console.log("JOGO 1:", jogos[0]);
+  const ativos = alugueis.filter((a) => !a.dataFinalizacao);
+  const finalizados = alugueis.filter((a) => a.dataFinalizacao);
 
   return (
     <div>
@@ -115,35 +102,6 @@ export default function Alugueis() {
           + Novo aluguel
         </button>
       </div>
-
-      <div
-        className="grid gap-4 mb-8"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}
-      >
-        <div className="bg-panel border border-border p-5">
-          <div className="text-[0.65rem] uppercase tracking-[0.15em] text-dim mb-2">
-            Aluguéis ativos
-          </div>
-          <div className="font-retro text-4xl text-neon">
-            {ativos.length}
-          </div>
-        </div>
-
-        <div className="bg-panel border border-border p-5">
-          <div className="text-[0.65rem] uppercase tracking-[0.15em] text-dim mb-2">
-            Finalizados
-          </div>
-          <div className="font-retro text-4xl text-success">
-            {finalizados.length}
-          </div>
-        </div>
-      </div>
-
-      {erro && !modal && (
-        <div className="mb-4 border border-danger bg-danger/10 text-danger px-3 py-2 text-sm">
-          {erro}
-        </div>
-      )}
 
       <div className="bg-panel border border-border overflow-auto">
         {carregando ? (
@@ -166,33 +124,24 @@ export default function Alugueis() {
 
             <tbody>
               {alugueis.map((aluguel) => (
-                <tr key={aluguel.id}>
-                  <td className="px-4 py-3">
-                    {aluguel.cliente}
-                  </td>
-
-                  <td className="px-4 py-3">
-                    {aluguel.jogo}
-                  </td>
-
+                <tr
+                  key={aluguel.id}
+                  data-testid="aluguel-row"
+                >
+                  <td className="px-4 py-3">{aluguel.cliente}</td>
+                  <td className="px-4 py-3">{aluguel.jogo}</td>
                   <td className="px-4 py-3">
                     {aluguel.dataRetirada?.split("T")[0]}
                   </td>
-
                   <td className="px-4 py-3">
                     {aluguel.dataDevolucao?.split("T")[0]}
                   </td>
-
                   <td className="px-4 py-3">
                     R$ {Number(aluguel.valorTotal).toFixed(2)}
                   </td>
-
                   <td className="px-4 py-3">
-                    {aluguel.dataFinalizacao
-                      ? "Finalizado"
-                      : "Em aberto"}
+                    {aluguel.dataFinalizacao ? "Finalizado" : "Em aberto"}
                   </td>
-
                   <td className="px-4 py-3">
                     {!aluguel.dataFinalizacao && (
                       <button
@@ -208,31 +157,17 @@ export default function Alugueis() {
             </tbody>
           </table>
         )}
-
-        {!carregando && alugueis.length === 0 && (
-          <div className="py-10 text-center text-dim text-sm">
-            Nenhum aluguel encontrado
-          </div>
-        )}
       </div>
 
       {modal && (
-        <Modal
-          title="Novo aluguel"
-          onClose={() => setModal(false)}
-        >
-          {erro && (
-            <div className="mb-4 border border-danger bg-danger/10 text-danger px-3 py-2 text-sm rounded">
-              {erro}
-            </div>
-          )}
-
+        <Modal title="Novo aluguel" onClose={() => setModal(false)}>
           <div className="mb-5">
             <label className="block text-sm text-dim mb-2">
               Cliente
             </label>
 
             <select
+              name="usuario"
               style={{
                 backgroundColor: "#ffffff",
                 color: "#000000",
@@ -241,14 +176,10 @@ export default function Alugueis() {
               className="w-full rounded px-3 py-2"
               value={form.customer_id}
               onChange={(e) =>
-                setForm({
-                  ...form,
-                  customer_id: e.target.value,
-                })
+                setForm({ ...form, customer_id: e.target.value })
               }
             >
               <option value="">Selecione um cliente</option>
-
               {clientes.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.nome}
@@ -263,6 +194,7 @@ export default function Alugueis() {
             </label>
 
             <select
+              name="jogo"
               style={{
                 backgroundColor: "#ffffff",
                 color: "#000000",
@@ -271,10 +203,7 @@ export default function Alugueis() {
               className="w-full rounded px-3 py-2"
               value={form.game_id}
               onChange={(e) =>
-                setForm({
-                  ...form,
-                  game_id: e.target.value,
-                })
+                setForm({ ...form, game_id: e.target.value })
               }
             >
               <option value="">Selecione um jogo</option>
@@ -299,10 +228,7 @@ export default function Alugueis() {
               className="w-full bg-surface-3 border border-border rounded px-3 py-2 text-white outline-none focus:border-neon"
               value={form.due_date}
               onChange={(e) =>
-                setForm({
-                  ...form,
-                  due_date: e.target.value,
-                })
+                setForm({ ...form, due_date: e.target.value })
               }
             />
           </div>
@@ -316,6 +242,7 @@ export default function Alugueis() {
             </button>
 
             <button
+              type="button"
               className="px-4 py-2 bg-neon text-black rounded font-semibold"
               onClick={salvar}
             >
