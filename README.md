@@ -78,7 +78,6 @@ locadora_SA/
 │   │   │   └── Table.jsx
 │   │   ├── pages/
 │   │   │   ├── Alugueis.jsx
-│   │   │   ├── Cadastro.jsx
 │   │   │   ├── Dashboard.jsx
 │   │   │   ├── Jogos.jsx
 │   │   │   ├── Login.jsx
