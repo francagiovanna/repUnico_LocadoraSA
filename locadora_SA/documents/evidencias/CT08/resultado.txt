@@ -1,0 +1,3 @@
+Resultado:
+
+O teste foi executado com sucesso. O sistema removeu o jogo selecionado após confirmação e o registro deixou de aparecer na listagem.

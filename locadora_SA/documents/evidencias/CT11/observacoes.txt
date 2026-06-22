@@ -1,1 +1,3 @@
-Observações: o principal ajuste necessário foi garantir a abertura do modal antes da interação e o clique explícito no botão de salvar. Também foi necessário selecionar opções válidas nos campos de cliente e jogo, além de preencher a data de devolução. A validação final pela presença de linha na tabela mostrou-se adequada para confirmar o sucesso da operação.
+Observações:
+
+Na primeira versão, o teste usava locator("select[name='usuario']") para encontrar os selects do modal. O teste falhou com timeout de 30 segundos porque esse atributo name foi removido dos elementos <select> durante a correção de inline styles em Alugueis.jsx. Como os selects não tinham mais identificadores próprios, o locator nunca encontrou o elemento. Corrigido usando getByRole("combobox") com .first() e .nth(1) para selecionar os campos por ordem de aparição no modal.

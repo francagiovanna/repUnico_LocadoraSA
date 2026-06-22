@@ -1,0 +1,3 @@
+Observações:
+
+O teste passou por duas falhas consecutivas antes de funcionar. Na primeira, getByRole("textbox").first() selecionava a barra de busca da página ao fundo em vez do campo título dentro do modal — o texto editado era inserido no filtro de busca, que escondia todos os jogos e deixava a tabela vazia. Corrigido com .nth(1). Na segunda falha, waitForSelector("tbody tr") expirava porque o componente entra em estado carregando: true após salvar, removendo as linhas da tabela temporariamente. Corrigido aguardando o fechamento do modal antes de verificar o conteúdo da tabela.

@@ -1,0 +1,3 @@
+Observações:
+
+Na primeira versão, o locator getByText(/título/i) causou falha com erro de modo estrito — o Playwright encontrou dois elementos correspondentes simultaneamente: o subtítulo da página ("21 títulos cadastrados") e o cabeçalho da tabela (<th>Título</th>). O Playwright em modo estrito não aceita ambiguidade e lança erro em vez de escolher um dos elementos. Corrigido substituindo por getByRole("columnheader"), que é específico para elementos <th> e elimina a ambiguidade.

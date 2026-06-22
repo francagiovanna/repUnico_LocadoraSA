@@ -1,0 +1,3 @@
+Resultado:
+
+O teste foi executado com sucesso. A busca filtrou corretamente os jogos conforme o termo digitado e restaurou a listagem completa ao limpar o campo.

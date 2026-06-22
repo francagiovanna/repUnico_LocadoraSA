@@ -1,1 +1,3 @@
-Resultado: aprovado. O fluxo de criação de aluguel funcionou corretamente após a abertura do modal, preenchimento dos campos obrigatórios e envio do formulário. O sistema registrou o aluguel e a listagem foi atualizada, permitindo a validação da presença de uma nova linha na tabela.
+Resultado:
+
+O teste foi executado com sucesso. O sistema registrou corretamente um novo aluguel com cliente, jogo e data de devolução selecionados, e o registro apareceu na listagem após salvar.

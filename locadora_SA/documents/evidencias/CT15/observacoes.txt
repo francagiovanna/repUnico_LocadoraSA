@@ -1,0 +1,3 @@
+Observações:
+
+A funcionalidade de busca é implementada inteiramente no frontend via Array.filter() sobre o estado local, sem nenhuma chamada à API a cada digitação. Por isso o teste não precisa aguardar respostas de rede — a filtragem é instantânea. O teste valida dois comportamentos: que apenas jogos contendo o termo buscado aparecem na tabela, e que ao limpar o campo a lista volta a exibir todos os registros disponíveis.

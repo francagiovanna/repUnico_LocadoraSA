@@ -1,0 +1,3 @@
+Resultado:
+
+O teste foi executado com sucesso. A tela de jogos carregou corretamente com pelo menos um registro na tabela e todos os cabeçalhos obrigatórios visíveis.

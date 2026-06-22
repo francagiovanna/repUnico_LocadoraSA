@@ -1,0 +1,3 @@
+Resultado:
+
+O teste foi executado com sucesso. A tela de aluguéis exibiu corretamente a listagem com todos os registros, cabeçalhos obrigatórios visíveis e status de cada aluguel identificado.

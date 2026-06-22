@@ -1,0 +1,3 @@
+Observações:
+
+Para garantir isolamento, o teste cria um jogo dedicado exclusivamente para ser excluído, em vez de depender de dados preexistentes no banco. Isso evita que o teste remova registros reais que outros testes ou funcionalidades possam depender, e garante que o comportamento verificado é sempre o mesmo independentemente do estado atual do banco de dados.

@@ -1,0 +1,3 @@
+Resultado:
+
+O teste foi executado com sucesso. O sistema abriu o modal de edição com os dados do jogo preenchidos, permitiu alterar o título e salvou corretamente, refletindo o novo valor na tabela após o recarregamento.
